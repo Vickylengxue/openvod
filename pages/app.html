@@ -5,12 +5,13 @@
         <div ng-show="app.loading">loading...</div>
         <!-- header start -->
         <div class="project-title">project/LOGO</div>
-        <div ng-click="app.logout()" class="avatar" ng-class="{'blur':(app.showMaskClass)}" style="transition-duration: .53s"></div>
+        <div ng-click="app.logout()" class="avatar" ng-class="{'blur':(app.showMaskClass)}" style="transition-duration: .33s"></div>
         <!-- grid -->
         <div class="app-grid-wrapper">
             <div ng-repeat='appIcon in appList' class="app-grid">
-                <i ng-click="app.switchApp(appIcon.id)" class="app-icon"></i>
-                <h4 class="app-name">{{appIcon.name}} {{appIcon.bgColor}}</h4>
+                <i ng-click="app.switchApp(appIcon.id)" class="app-icon" style="background-image: url({{appIcon.icon}})"></i>
+                <h4 class="app-name">{{appIcon.name}}</h4>
+                <!-- {{appIcon.bgColor}} -->
             </div>
             <!-- 空白网格，数量等于{每行最大数量}, 用来保持网格整体各式正常-->
             <div class="app-grid"></div>
@@ -24,25 +25,29 @@
     <!-- app -->
     <div class="app-frame phase{{app.appFramePhase}}">
         <!-- white bg -->
+        <div class="app-title-blur-bg" ng-class="{'in':(app.showMaskClass)}" style="background-color: {{app.activeAppThemeColor}}"></div>
         <div class="app-view-blur-bg" ng-class="{'in':(app.showMaskClass)}"></div>
+
         <!-- blur wrapper -->
         <div ng-class="{'blur':(app.showMaskClass)}">
             <!-- app title -->
-            <div class="app-title">
-                <i class="app-icon" style=" background: -webkit-radial-gradient(0% 110%, rgba(216,156,44,1) 11%,rgba(211,157,116,0) 70%);"></i>
-                <h4 class="app-name">{{app.activeAppName}} {{app.activeAppBgColor}}</h4>
+            <div class="app-title" style="background-color: {{app.activeAppBgColor}}">
+                <i class="app-icon" style="background-image: url({{app.activeAppIcon}})"></i>
+                <!-- background: -webkit-radial-gradient(0% 110%, rgba(216,156,44,1) 11%,rgba(211,157,116,0) 70%); {{app.activeAppThemeColor}}-->
+                <h4 class="app-name">{{app.activeAppName}} </h4>
             </div>
             <!-- launcher -->
             <div class="app-launcher">
                 <!-- back -->
                 <div class="app-launcher-grid">
-                    <i ng-click="app.showDesktop()" class="app-icon app-back"></i>
+                    <i ng-click="app.showDesktop()" class="app-icon app-back" style="background-image: url('dist/imgs/app-icon-05.png'); box-shadow: inset 0px 0px 1px 1px rgba(255,255,255,.6);"></i>
                     <h5 class="app-name">{{'HOME' | translate}}</h5>
                 </div>
                 <!-- launcher-grid -->
                 <div ng-repeat='appIcon in appList' class="app-launcher-grid">
-                    <i ng-click="app.switchApp(appIcon.id)" class="app-icon"></i>
-                    <h5 class="app-name">{{appIcon.name}} {{appIcon.bgColor}}</h5>
+                    <i ng-click="app.switchApp(appIcon.id)" class="app-icon" style="background-image: url({{appIcon.icon}})"></i>
+                    <h5 class="app-name">{{appIcon.name}}</h5>
+                    <!-- {{appIcon.bgColor}} -->
                 </div>
             </div>
             <div ng-click="app.focusLauncher()" class="app-launcher-mask phase1" data-phase="1"></div>
@@ -71,5 +76,60 @@
     .bg:before {
         opacity: 0;
     }
+
+    /*主题样式*/
+    .theme-color,.button,table a,table a:hover,.modal-title{
+        color: {{app.activeAppThemeColor}}; 
+    }
+    .theme-bg{
+        background: {{app.activeAppThemeColor}}
+    }
+
+    .form-control:focus{
+        border-color:{{app.activeAppThemeColor}};
+    }
+
+    .tag.active{
+        background-color: {{app.activeAppThemeColor}};
+    }
+
+    
+    a.theme-hover:hover{
+        color: {{app.activeAppThemeColor}};
+    }
+
+    .nav-header.active a{
+        color: #000 !important;
+        margin-bottom: 6px;
+        border-bottom: solid 1px {{app.activeAppThemeColor}};
+    }
+
+    .nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover{
+        border-color: {{app.activeAppThemeColor}};
+    }
+
+    .pagination>.active>a,
+    .pagination>.active>a:focus,
+    .pagination>.active>a:hover,
+    .pagination>.active>span,
+    .pagination>.active>span:focus,
+    .pagination>.active>span:hover{
+        background-color: {{app.activeAppThemeColor}};
+        border-color: {{app.activeAppThemeColor}};
+    }
+    .pagination>li>a,
+    .pagination>li>span,
+    .pagination>li>a,
+    .pagination>li>span,
+    .pagination>li>a:focus,
+    .pagination>li>a:hover,
+    .pagination>li>span:focus,
+    .pagination>li>span:hover{
+        color: {{app.activeAppThemeColor}};
+    }
+
+
+
+
     </style>
 </div>
